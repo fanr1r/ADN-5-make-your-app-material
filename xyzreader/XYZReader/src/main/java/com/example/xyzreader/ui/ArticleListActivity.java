@@ -57,7 +57,9 @@ public class ArticleListActivity extends AppCompatActivity implements
         StaggeredGridLayoutManager sglm =
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(sglm);
-        mArticleAdapter = new ArticleAdapter(null, this);
+        if (mArticleAdapter == null) {
+            mArticleAdapter = new ArticleAdapter(null, this);
+        }
         mArticleAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mArticleAdapter);
 
