@@ -26,9 +26,12 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.0'
     compile 'com.android.support:support-v13:23.0.0'
     compile 'com.android.support:appcompat-v7:23.1.1'
+
+    // picking a palette from an image
     compile 'com.android.support:palette-v7:23.0.0'
+
+    // for article list
     compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:cardview-v7:23.0.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
 
