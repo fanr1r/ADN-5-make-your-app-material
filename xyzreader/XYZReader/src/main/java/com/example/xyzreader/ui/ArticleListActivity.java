@@ -99,7 +99,7 @@ public class ArticleListActivity extends ActionBarActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        Adapter adapter = new Adapter(cursor, this);
+        ArticleAdapter adapter = new ArticleAdapter(cursor, this);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
         int columnCount = getResources().getInteger(R.integer.list_column_count);
@@ -113,11 +113,11 @@ public class ArticleListActivity extends ActionBarActivity implements
         mRecyclerView.setAdapter(null);
     }
 
-    private class Adapter extends RecyclerView.Adapter<ViewHolder> {
+    private class ArticleAdapter extends RecyclerView.Adapter<ViewHolder> {
         private Cursor mCursor;
         private Activity mActivity;
 
-        public Adapter(Cursor cursor, Activity activity) {
+        public ArticleAdapter(Cursor cursor, Activity activity) {
             mCursor = cursor;
             mActivity = activity;
         }
