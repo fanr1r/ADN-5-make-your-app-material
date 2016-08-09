@@ -38,6 +38,7 @@ public class ArticleListActivity extends AppCompatActivity implements
     private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
+    private ArticleAdapter mArticleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,14 @@ public class ArticleListActivity extends AppCompatActivity implements
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        StaggeredGridLayoutManager sglm =
+                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(sglm);
+        mArticleAdapter = new ArticleAdapter(null, this);
+        mArticleAdapter.setHasStableIds(true);
+        mRecyclerView.setAdapter(mArticleAdapter);
+
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
@@ -99,13 +108,8 @@ public class ArticleListActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        ArticleAdapter adapter = new ArticleAdapter(cursor, this);
-        adapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(adapter);
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
-        StaggeredGridLayoutManager sglm =
-                new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(sglm);
+        mArticleAdapter.setCursor(cursor);
+        mArticleAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -120,6 +124,10 @@ public class ArticleListActivity extends AppCompatActivity implements
         public ArticleAdapter(Cursor cursor, Activity activity) {
             mCursor = cursor;
             mActivity = activity;
+        }
+
+        public void setCursor(Cursor mCursor) {
+            this.mCursor = mCursor;
         }
 
         @Override
@@ -170,7 +178,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         @Override
         public int getItemCount() {
-            return mCursor.getCount();
+            return mCursor != null ? mCursor.getCount() : 0;
         }
     }
 
