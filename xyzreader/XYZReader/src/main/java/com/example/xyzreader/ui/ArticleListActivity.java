@@ -165,13 +165,16 @@ public class ArticleListActivity extends AppCompatActivity implements
         public void onBindViewHolder(ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+
+            String date = DateUtils.getRelativeTimeSpanString(
+                    mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
+                    System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+                    DateUtils.FORMAT_ABBREV_ALL).toString();
+            String author = mCursor.getString(ArticleLoader.Query.AUTHOR);
             holder.subtitleView.setText(
-                    DateUtils.getRelativeTimeSpanString(
-                            mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
-                            System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
-                            DateUtils.FORMAT_ABBREV_ALL).toString()
-                            + " by "
-                            + mCursor.getString(ArticleLoader.Query.AUTHOR));
+                    getResources().getString(R.string.subtitle_list_item_article, date, author)
+            );
+
             Picasso.with(getApplicationContext()).load(mCursor.getString(ArticleLoader.Query.THUMB_URL)).into(holder.thumbnailView);
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
         }

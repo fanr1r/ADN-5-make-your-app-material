@@ -12,4 +12,7 @@
     <!-- Shared Element transition identifier for image transition for an article  -->
     <string name="shared_article_thumbnail_transition" translatable="false">shared_article_thumbnail_transition</string>
 
+    <!-- Article list item subtitle  -->
+    <string name="subtitle_list_item_article">%1$s by %2$s</string>
+
 </resources>
