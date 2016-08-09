@@ -21,6 +21,7 @@
                 <!--suppress AndroidLintContentDescription -->
                 <ImageView
                     android:id="@+id/photo"
+                    android:transitionName="@string/shared_article_thumbnail_transition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                      />

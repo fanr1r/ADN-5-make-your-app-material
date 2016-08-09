@@ -9,4 +9,7 @@
 
     <string name="up">Up</string>
 
+    <!-- Shared Element transition identifier for image transition for an article  -->
+    <string name="shared_article_thumbnail_transition" translatable="false">shared_article_thumbnail_transition</string>
+
 </resources>
